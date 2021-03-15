@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ProyectoPractica</string>
+    <string name="listview1">listview1</string>
+    <string name="listview2">listview2</string>
+    <string name="listview3">listview3</string>
+    <string name="listview4">listview4</string>
+</resources>
