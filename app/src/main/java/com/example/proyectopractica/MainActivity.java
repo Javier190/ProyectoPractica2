@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
 
         //MyAdapter myAdapter = new MyAdapter(this, R.layout.list_item_cuatro_columnas,nombresString);
         //listview1.setAdapter(myAdapter);
-
     }
 
     public void truncarTabla(View view) {

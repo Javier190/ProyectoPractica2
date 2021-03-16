@@ -53,8 +53,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="409dp"
-        android:layout_height="86dp"
+        android:layout_width="408dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,8 +99,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="356dp"
-        android:layout_height="195dp"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,10 +128,11 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
+
     <Button
         android:id="@+id/btn_truncar"
-        android:layout_width="169dp"
-        android:layout_height="46dp"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
         android:onClick="truncarTabla"
         android:text="Truncar  Tabla"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
