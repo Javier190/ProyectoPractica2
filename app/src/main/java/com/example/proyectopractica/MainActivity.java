@@ -12,10 +12,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private EditText et1;
     private EditText et2;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv2;
     private TextView tv3;
     private TextView tv4;
+
     private ListView listview1;
     private ListView listview2;
     private ListView listview3;
@@ -56,17 +58,14 @@ public class MainActivity extends AppCompatActivity {
         et1.setText(null);
         et2.setText(null);
         et3.setText(null);
-        et4.setText(null);
-    }
+        et4.setText(null); }
 
     public void insertar(View view){
         admin.insertarDatos(et1.getText().toString() , et2.getText().toString(),
                 Integer.parseInt(et3.getText().toString()), et4.getText().toString());
         admin.abrirBaseDeDatos();
         limpiar(view);
-        Toast.makeText(this, "Datos Ingresados", Toast.LENGTH_SHORT).show();
-
-    }
+        Toast.makeText(this, "Datos Ingresados", Toast.LENGTH_SHORT).show(); }
 
     public void modificar(View view){
         Persona persona = new Persona();
@@ -77,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         admin.modificarDatos(persona);
         limpiar(view);
-        Toast.makeText(this, "Datos Modificados", Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(this, "Datos Modificados", Toast.LENGTH_SHORT).show(); }
 
     public void eliminar(View view){   //aca solamente se nesecita el nombre porque es la PK
         Persona persona = new Persona();
@@ -87,10 +85,7 @@ public class MainActivity extends AppCompatActivity {
         admin.eliminarDatos(persona);
 
         limpiar(view);
-        Toast.makeText(this, "Datos Borrados !", Toast.LENGTH_SHORT).show();
-    }
-
-
+        Toast.makeText(this, "Datos Borrados !", Toast.LENGTH_SHORT).show(); }
 
     public void seleccionar(View view){
 
@@ -101,40 +96,18 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> edadString = new ArrayList<String>();
         ArrayList<String> sexoString = new ArrayList<String>();
 
-        //O Puedo hacer un tablelayout y dentro 4 listviews y ahi usar 4 adapters distintos para 4 arraylists
-
         //Traer nombres SI tengo menos datos que los que estoy seleccionando la APP se cae.
-        nombresString.add(personas.get(1).getNombre());
-        nombresString.add(personas.get(2).getNombre());
-        nombresString.add(personas.get(3).getNombre());
-        nombresString.add(personas.get(4).getNombre());
-        nombresString.add(personas.get(5).getNombre());
-        nombresString.add(personas.get(6).getNombre());
-
-
+        for (int i=0; i < personas.size(); i++) {
+        nombresString.add(personas.get(i).getNombre()); }
         //Traer Apellidos
-        apellidosString.add(personas.get(1).getApellido());
-        apellidosString.add(personas.get(2).getApellido());
-        apellidosString.add(personas.get(3).getApellido());
-        apellidosString.add(personas.get(4).getApellido());
-        apellidosString.add(personas.get(5).getApellido());
-        apellidosString.add(personas.get(6).getApellido());
+        for (int i=0; i < personas.size(); i++) {
+            apellidosString.add(personas.get(i).getApellido()); }
 
+        for (int i=0; i < personas.size(); i++) {
+            edadString.add(String.valueOf(personas.get(i).getEdad())); }
 
-        edadString.add(String.valueOf(personas.get(1).getEdad()));
-        edadString.add(String.valueOf(personas.get(2).getEdad()));
-        edadString.add(String.valueOf(personas.get(3).getEdad()));
-        edadString.add(String.valueOf(personas.get(4).getEdad()));
-        edadString.add(String.valueOf(personas.get(5).getEdad()));
-        edadString.add(String.valueOf(personas.get(6).getEdad()));
-
-
-        sexoString.add(personas.get(1).getSexo());
-        sexoString.add(personas.get(2).getSexo());
-        sexoString.add(personas.get(3).getSexo());
-        sexoString.add(personas.get(4).getSexo());
-        sexoString.add(personas.get(5).getSexo());
-        sexoString.add(personas.get(6).getSexo());
+        for (int i=0; i < personas.size(); i++) {
+            sexoString.add(personas.get(i).getSexo()); }
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nombresString);
@@ -142,21 +115,41 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, edadString);
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexoString);
 
-
         listview1.setAdapter(adapter);
         listview2.setAdapter(adapter1);
         listview3.setAdapter(adapter2);
         listview4.setAdapter(adapter3);
 
-
         Toast.makeText(this, "Mostrando Datos", Toast.LENGTH_SHORT).show();
-
-
-        //MyAdapter myAdapter = new MyAdapter(this, R.layout.list_item_cuatro_columnas,nombresString);
-        //listview1.setAdapter(myAdapter);
     }
 
-    public void truncarTabla(View view) {
-        admin.truncarTabla("USUARIO");
+    public void seleccionarParalelo(View view){
+
+        ArrayList<Persona> personas = admin.seleccionDatos();
+        ArrayList<String> nombresString = new ArrayList<String>();
+
+        nombresString.add(personas.get(1).getNombre());
+        nombresString.add(personas.get(2).getNombre());
+        nombresString.add(personas.get(3).getNombre());
+
+        tv1 = (TextView) findViewById(R.id.tv1);
+        tv2 = (TextView) findViewById(R.id.tv2);
+        tv3 = (TextView) findViewById(R.id.tv3);
+        tv4 = (TextView) findViewById(R.id.tv4);
+
+        tv1.setText(personas.get(2).getNombre());
+        tv1.setText(personas.get(2).getApellido());
+        tv1.setText(personas.get(2).getEdad());
+        tv1.setText(personas.get(2).getSexo());
+
+        ListaPersonas listaPersonas = new ListaPersonas(tv1, tv2, tv3, tv4);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,nombresString);
     }
+
+
+
+
+
+    //public void truncarTabla(View view) { admin.truncarTabla("USUARIO"); }
 }

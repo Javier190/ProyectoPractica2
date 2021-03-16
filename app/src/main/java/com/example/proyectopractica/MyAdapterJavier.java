@@ -13,10 +13,10 @@ public class MyAdapterJavier extends BaseAdapter {
     //Atributos
     private Context context;
     private int layout;
-    private ArrayList<Persona> names;
+    private ArrayList<String> names;
 
     //Constructor
-    public MyAdapterJavier(Context context, int layout, ArrayList<Persona> names){
+    public MyAdapterJavier(Context context, int layout, ArrayList<String> names){
         this.context = context;
         this.layout = layout;
         this.names = names;
@@ -48,7 +48,7 @@ public class MyAdapterJavier extends BaseAdapter {
         v= layoutInflater.inflate(R.layout.list_item_cuatro_columnas, null);
         // Valor actual según la posición
 
-        String currentName  = "names.get(position)";
+        String currentName  = names.get(position);
 
         // Referenciamos el elemento a modificar y lo rellenamos
         TextView textView = (TextView) v.findViewById(R.id.textView);
