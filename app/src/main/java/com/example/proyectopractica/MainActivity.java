@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 Integer.parseInt(et3.getText().toString()), et4.getText().toString());
         admin.abrirBaseDeDatos();
         limpiar(view);
-        Toast.makeText(this, "Datos Ingresados", Toast.LENGTH_SHORT).show(); }
+        Toast.makeText(this, "Datos Ingresados !", Toast.LENGTH_SHORT).show(); }
 
     public void modificar(View view){
         Persona persona = new Persona();
