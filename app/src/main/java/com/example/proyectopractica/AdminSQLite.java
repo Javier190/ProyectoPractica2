@@ -63,6 +63,7 @@ public class AdminSQLite extends SQLiteOpenHelper {
     }
 
     public ArrayList <Persona> seleccionDatos(){
+
         SQLiteDatabase db = getReadableDatabase();
         Cursor c;
         ArrayList<Persona> personas = new ArrayList<Persona>();

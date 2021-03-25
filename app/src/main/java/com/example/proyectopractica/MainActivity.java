@@ -46,9 +46,7 @@ public class MainActivity extends AppCompatActivity {
         et3 = (EditText)findViewById(R.id.et3);
         et4 = (EditText)findViewById(R.id.et4);
         listview1 = (ListView) findViewById(R.id.listview1);
-        listview2 = (ListView) findViewById(R.id.listview2);
-        listview3 = (ListView) findViewById(R.id.listview3);
-        listview4 = (ListView) findViewById(R.id.listview4);
+
 
         admin = new AdminSQLite(getApplicationContext());
         admin.abrirBaseDeDatos();
@@ -92,34 +90,29 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Persona> personas = admin.seleccionDatos();
 
         ArrayList<String> nombresString = new ArrayList<String>();  //tuve que crear un nuevo arraylist de Tipo String y ahi almaceno los valores para asi poder usar el adapter.
-        ArrayList<String> apellidosString = new ArrayList<String>();
-        ArrayList<String> edadString = new ArrayList<String>();
-        ArrayList<String> sexoString = new ArrayList<String>();
+
 
         //Traer nombres SI tengo menos datos que los que estoy seleccionando la APP se cae.
-        for (int i=0; i < personas.size(); i++) {
-        nombresString.add(personas.get(i).getNombre()); }
+
+
+        //**IMPORTANTE: Otra forma de hacer esto es COn un arraylist tipo Persona y otro tipo 1 arraylist tipo String donde se concatena toda la informacion de nombres,apellido,edad y sexo y ESo se muestra
+        //for (int i=0; i < personas.size(); i++) {
+        //nombresString.add(personas.get(i).getNombre()); }
         //Traer Apellidos
-        for (int i=0; i < personas.size(); i++) {
-            apellidosString.add(personas.get(i).getApellido()); }
 
-        for (int i=0; i < personas.size(); i++) {
-            edadString.add(String.valueOf(personas.get(i).getEdad())); }
 
         for (int i=0; i < personas.size(); i++) {
-            sexoString.add(personas.get(i).getSexo()); }
+            nombresString.add(personas.get(i).getNombre()+ "       " + personas.get(i).getApellido() + "       " + personas.get(i).getEdad()+ "       " + personas.get(i).getSexo()); }
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nombresString);
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, apellidosString);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, edadString);
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sexoString);
+        //CODIGO EXTRA PARA USAR EL ADAPTER DE FORMA DIFERENTE
+        //ArrayAdapter<Persona> adapter = new ArrayAdapter<Persona>(this, android.R.layout.simple_list_item_1, Persona.personas);
+
+       ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nombresString);
+
+
 
         listview1.setAdapter(adapter);
-        listview2.setAdapter(adapter1);
-        listview3.setAdapter(adapter2);
-        listview4.setAdapter(adapter3);
-
         Toast.makeText(this, "Mostrando Datos", Toast.LENGTH_SHORT).show();
     }
 
@@ -146,9 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,nombresString);
     }
-
-
-
 
 
     //public void truncarTabla(View view) { admin.truncarTabla("USUARIO"); }
