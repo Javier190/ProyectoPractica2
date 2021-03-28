@@ -16,6 +16,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+//Programa Completo que realice solo para poder prepaparme para la prueba. Contiene CRUD, uso de 2 adapters para Listviews con layouts Personalziados
+//Clase AdminSQLite donde van el CRUD
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText et1;
@@ -91,55 +94,17 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> nombresString = new ArrayList<String>();  //tuve que crear un nuevo arraylist de Tipo String y ahi almaceno los valores para asi poder usar el adapter.
 
-
-        //Traer nombres SI tengo menos datos que los que estoy seleccionando la APP se cae.
-
-
-        //**IMPORTANTE: Otra forma de hacer esto es COn un arraylist tipo Persona y otro tipo 1 arraylist tipo String donde se concatena toda la informacion de nombres,apellido,edad y sexo y ESo se muestra
-        //for (int i=0; i < personas.size(); i++) {
-        //nombresString.add(personas.get(i).getNombre()); }
-        //Traer Apellidos
-
-
         for (int i=0; i < personas.size(); i++) {
             nombresString.add(personas.get(i).getNombre()+ "       " + personas.get(i).getApellido() + "       " + personas.get(i).getEdad()+ "       " + personas.get(i).getSexo()); }
-
 
         //CODIGO EXTRA PARA USAR EL ADAPTER DE FORMA DIFERENTE
         //ArrayAdapter<Persona> adapter = new ArrayAdapter<Persona>(this, android.R.layout.simple_list_item_1, Persona.personas);
 
        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nombresString);
 
-
-
         listview1.setAdapter(adapter);
         Toast.makeText(this, "Mostrando Datos", Toast.LENGTH_SHORT).show();
     }
 
-    public void seleccionarParalelo(View view){
-
-        ArrayList<Persona> personas = admin.seleccionDatos();
-        ArrayList<String> nombresString = new ArrayList<String>();
-
-        nombresString.add(personas.get(1).getNombre());
-        nombresString.add(personas.get(2).getNombre());
-        nombresString.add(personas.get(3).getNombre());
-
-        tv1 = (TextView) findViewById(R.id.tv1);
-        tv2 = (TextView) findViewById(R.id.tv2);
-        tv3 = (TextView) findViewById(R.id.tv3);
-        tv4 = (TextView) findViewById(R.id.tv4);
-
-        tv1.setText(personas.get(2).getNombre());
-        tv1.setText(personas.get(2).getApellido());
-        tv1.setText(personas.get(2).getEdad());
-        tv1.setText(personas.get(2).getSexo());
-
-        ListaPersonas listaPersonas = new ListaPersonas(tv1, tv2, tv3, tv4);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,nombresString);
-    }
-
-
-    //public void truncarTabla(View view) { admin.truncarTabla("USUARIO"); }
+    public void truncarTabla(View view) { admin.truncarTabla("USUARIO"); }
 }
